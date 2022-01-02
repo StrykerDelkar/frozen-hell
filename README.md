@@ -15,10 +15,26 @@ In this repo I want to share my journey, problems I encountered and how I solved
 
 ## Why I chose Garuda Linux
 
+## Native applications
+- Mozilla Thunderbird
+- Mozilla Firefox, Chrome, ...
+- Davinci Resolve Studio 
+- IntelliJ IDEA, Eclipse, Visual Studio Code, ...
+- 
+
 ## Successfull migrations:
 
-| Application      | Description   | How to accomplish |
-| ---------------- | ------------- | ------------------|
-| Steam            | Game Launcher | Native, |   
+| Application/Task   | Description               | replacement | How to accomplish |
+| ------------------ | ------------------------- | ----------- | ----------------- |
+| Steam              | Game Launcher             | none        | Native, Proton    |
+| iCue (Keyboard)    | Keyboard lighting/macros  | ckb-next    | install [ckb-next](https://aur.archlinux.org/packages/ckb-next/) |
+| iCue (fan control) | Commander Pro fan Control | TBA         | TBA               |
+
+## Impossible migrations
+
+| Application/Task                        | Reason                                              |
+| --------------------------------------- | --------------------------------------------------- |
+| Ubisoft Connect Games w/Easy Anti Cheat | They use a pre-Epic EAC with no wine/proton support | 
 
 ## My configuration
+
