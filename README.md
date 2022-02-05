@@ -27,7 +27,7 @@ I looked up a few things I previously had difficulties with and decided to give 
 ## Successfull migrations:
 
 | Application/Task   | Description               | replacement           | How to accomplish |
-| ------------------ | ------------------------- | ----------- ----------| ----------------- |
+| ------------------ | ------------------------- | --------------------- | ----------------- |
 | Steam              | Game Launcher             | none                  | Native, Proton    |
 | iCue (Keyboard)    | Keyboard lighting/macros  | ckb-next              | install [ckb-next](https://aur.archlinux.org/packages/ckb-next/) |
 | iCue (fan control) | Commander Pro fan Control | pwmconfig, fancontrol | follow [this](https://blog.ktz.me/a-usb-fan-controller-that-now-works-under-linux/) tutorial |
