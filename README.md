@@ -40,3 +40,5 @@ I looked up a few things I previously had difficulties with and decided to give 
 
 ## My configuration
 
+I configured many things to my own style and wishes. I chose orange as a base colour, but you can put in whatever you like, of course. 
+Any custom config files will be uploaded to this repo.
