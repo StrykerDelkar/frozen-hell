@@ -20,10 +20,10 @@ set $lockScreenWallpaper /home/patrick/Bilder/mixed-4k
 
 ### Applications: ###
 
-set $preferredTerminalEmulator /usr/bin/gnome-terminal
-set $preferredBrowser /usr/bin/google-chrome-stable
+set $preferredTerminalEmulator /usr/bin/alacritty
+set $preferredBrowser /usr/bin/vivaldi-stable
 set $preferredFileManager /usr/bin/pcmanfm
-set $preferredMailClient /usr/bin/geary
+set $preferredMailClient /usr/bin/thunderbird
 set $preferredTextEditor /usr/bin/gedit
 set $preferredScreenCaptureTool /usr/bin/flameshot gui
 
@@ -45,7 +45,7 @@ bindsym Print exec --no-startup-id $preferredScreenCaptureTool
 # - alacritty & xfce4-terminal can also be started using their individual keybindings
 
 bindsym $mod+Return exec $preferredTerminalEmulator
-bindsym $mod+t exec xfce4-terminal
+# bindsym $mod+t exec xfce4-terminal
 
 # set font
 font pango: source code pro 10
@@ -72,11 +72,13 @@ exec_always --no-startup-id setcursor
 exec_always --no-startup-id numlockx on
 exec blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
-exec --no-startup-id fancontrol
 
 ## custom autostart applications
 exec --no-startup-id discord
-exec --no-startup-id gnome-terminal
+exec --no-startup-id $preferredTerminalEmulator
+exec --no-startup-id telegram-desktop
+exec --no-startup-id fancontrol
+exec i3-layouts
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
@@ -103,15 +105,17 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 #bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 #bindsym XF86AudioMute exec pulseaudio-ctl mute
 
+bindsym XF86AudioNext exec ~/toggle_sink.sh
+
 
 # music control
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl prev
-bindsym XF86AudioPlay exec playerctl toggle
-bindsym XF86AudioStop exec playerctl stop
+# commented out because it might be useful later, but is currently used as additional
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl prev
+# bindsym XF86AudioPlay exec playerctl toggle
+# bindsym XF86AudioStop exec playerctl stop
 
 # Print screen
-
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
@@ -220,26 +224,25 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # bind workspaces to specific monitors
-# upper left
-workspace $ws3 output DP-4
-workspace $ws4 output DP-4
-
-#lower left
-workspace $ws1 output DP-0
-workspace $ws7 output DP-0
+# left
+workspace $ws1 output HDMI-A-0
+workspace $ws3 output HDMI-A-0
+workspace $ws4 output HDMI-A-0
+workspace $ws9 output HDMI-A-0
 
 #center
-workspace $ws2 output DP-2
-
+workspace $ws2 output DisplayPort-1
+workspace $ws7 output DisplayPort-1
 
 # assign commonly used applications to specific workspaces
 assign [class="Gedit"] 1
-assign [class="Gnome-terminal"] 1
+assign [class="Alacritty"] 1
 assign [class="Google-chrome"] 2
+assign [class="Vivaldi-stable"] 2
 assign [class="Pcmanfm"] 3
 assign [class="TelegramDesktop"] 4
 assign [class="discord"] 4
-assign [class= "MultiMC"] 9
+assign [class="MultiMC"] 9
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -274,13 +277,13 @@ bar {
 	#strip_workspace_numbers yes|no
 	#strip_workspace_name yes|no
 	colors {
-    background #222D31
+    background #111314
     statusline #ff7b1d
     separator  #ff7b1d
 
     focused_workspace  #292F34 #ff7b1d #292F34
-    active_workspace   #595B5B #353836 #FDF6E3
-    inactive_workspace #595B5B #222D31 #EEE8D5
+    active_workspace   #595B5B #222D31 #FDF6E3
+    inactive_workspace #595B5B #111314 #EEE8D5
     urgent_workspace   #ff7b1d #02597d #FDF6E3
     #binding_mode      #16a085 #2C2C2C #F9FAF9
     # colour of border, background, and text
@@ -328,8 +331,8 @@ for_window [class=URxvt|firedragon|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfb
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
 
 # colour of 		    border  backgr. text    indic.  child_border
-client.focused              #556064 #556064 #80FFF9 #FDF6E3 
-client.focused_inactive     #2F3D44 #2F3D44 #1ABC9C #454948 
+client.focused              #556064 #ff7b1d #80FFF9 #FDF6E3 
+client.focused_inactive     #2F3D44 #02597d #1ABC9C #454948 
 client.unfocused            #2F3D44 #2F3D44 #1ABC9C #454948 
 client.urgent               #CB4B16 #FDF6E3 #1ABC9C #268BD2 
 client.placeholder          #000000 #0c0c0c #ffffff #000000 

@@ -40,7 +40,22 @@ last_rx=0
 last_tx=0
 rate=""
 
-
+readable() {
+  local bytes=$1
+  local kib=$(( bytes >> 10 ))
+  if [ $kib -lt 0 ]; then
+    echo "? K"
+  elif [ $kib -gt 1024 ]; then
+    local mib_int=$(( kib >> 10 ))
+    local mib_dec=$(( kib % 1024 * 976 / 10000 ))
+    if [ "$mib_dec" -lt 10 ]; then
+      mib_dec="0${mib_dec}"
+    fi
+    echo "${mib_int}.${mib_dec} M"
+  else
+    echo "${kib} K"
+  fi
+}
 
 update_rate() {
   local time=$(date +%s)
@@ -55,7 +70,7 @@ update_rate() {
 
   local interval=$(( $time - $last_time ))
   if [ $interval -gt 0 ]; then
-    rate="$(readable $(( (rx - last_rx) / interval ))) $(readable $(( (tx - last_tx) / interval )))"
+    rate="$(readable $(( (rx - last_rx) / interval )))↓ $(readable $(( (tx - last_tx) / interval )))↑"
   else
     rate=""
   fi
@@ -71,5 +86,5 @@ do
   update_rate
   #echo "| ${rate} | ${line#\[}" || exit 1
   #echo "\"${rate}\" },${line#,\[}" || exit 1
-  echo ",[{\"color\":\"#ffffff\",\"full_text\":\" ${rate}\" },${line#,\[}" || exit 1
+  echo ",[{\"color\":\"#ff7b1d\",\"full_text\":\" ${rate}\" },${line#,\[}" || exit 1
 done)
